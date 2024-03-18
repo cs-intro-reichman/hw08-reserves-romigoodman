@@ -38,7 +38,7 @@ class PlayList {
         if (this.size<this.maxSize) // if this condition is true, there is space available in the list to add the track.
         {
         tracks[this.size]=track;
-        size++;
+        this.size++;
         return true;
         }
         else 
@@ -75,7 +75,7 @@ class PlayList {
         {
         for (int i=0; i<=this.size; i++)
         {
-        tracks[this.size] = tracks[this.size-1]; // or this.size = this.size-1;?
+        this.size=this.size-1; 
         }
         }
     }
@@ -120,13 +120,13 @@ class PlayList {
         else if (this.size==0 && i==0)
         {
             tracks[0]=track;
-            size++;
+            this.size++;
             add = true;
         } 
         else if (i==this.size && this.size<=this.maxSize+1)
         {
             tracks[this.size]=track;
-            size++;
+            this.size++;
             add = true;
         }
         else if (this.size<=this.maxSize+1)
