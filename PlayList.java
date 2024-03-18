@@ -84,19 +84,16 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) 
     {
-    int j=-1;
-    title = title.toLowerCase();
     for (int i=0; i<this.size; i++)
        {
-        if ( title == tracks[i].getTitle().toLowerCase())
+        if ( title.equals(tracks[i].getTitle()))
         {
-        j = i;
+        return i;
         }
-        else{
         j = -1;
-        }
-       }
-        return j;
+    }
+        return -1;
+       
     }
 
     /** Inserts the given track in index i of this list. For example, if the list is
