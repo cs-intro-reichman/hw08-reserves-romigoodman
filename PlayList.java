@@ -60,16 +60,6 @@ class PlayList {
         return result;
     }
 
-    public String toStringSingle(int i) {
-        StringBuilder dataToList = new StringBuilder();
-        if (tracks[i] != null) 
-        {
-        dataToList.append(tracks[i].toString()); 
-        }
-        String result = dataToList.toString(); 
-        result = result.toLowerCase(); 
-        return result;
-    }
 
     /** Removes the last track from this list. If the list is empty, does nothing. */
      public void removeLast() {
@@ -95,9 +85,9 @@ class PlayList {
     public int indexOf(String title) 
     {
     title = title.toLowerCase();
-    for (int i=0; i<=this.size; i++)
+    for (int i=0; i<this.size; i++)
        {
-        if ( title == toStringSingle(i))
+        if ( title == tracks[i].getTitle().toLowerCase())
         {
             return i;
         }
@@ -229,11 +219,11 @@ class PlayList {
      *  the list on which it was called (this list). */
     public void sortedInPlace() {
         for (int i = 0; i < this.size - 1; i++) {
-            int indexMin = minIndex(i);
-            if (i != indexMin) {
+            int minimum = minIndex(i);
+            if (i != minimum) {
                 Track temp = tracks[i];
-                tracks[i] = tracks[indexMin];
-                tracks[indexMin] = temp;
+                tracks[i] = tracks[minimum];
+                tracks[minimum] = temp;
             }
         }
     }
