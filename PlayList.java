@@ -62,8 +62,10 @@ class PlayList {
 
     public String toStringSingle(int i) {
         StringBuilder dataToList = new StringBuilder();
-          dataToList.append(tracks[i].toString()); 
-
+        if (tracks[i] != null) 
+        {
+        dataToList.append(tracks[i].toString()); 
+        }
         String result = dataToList.toString(); 
         result = result.toLowerCase(); 
         return result;
@@ -73,7 +75,7 @@ class PlayList {
      public void removeLast() {
         if (this.size!=0)
         {
-        for (int i=0; i<=this.size+1; i++)
+        for (int i=this.size-1; i>=0; i--)
         {
         this.size=this.size-1; 
         }
@@ -83,7 +85,7 @@ class PlayList {
     /** Returns the total duration (in seconds) of all the tracks in this list.*/
     public int totalDuration() {
         int totalSecounds = 0;
-        for (int i=0; i<=this.size; i++)
+        for (int i=0; i<this.size; i++)
         {
             totalSecounds = totalSecounds + tracks[i].getDuration();
         }
@@ -147,9 +149,9 @@ class PlayList {
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        if (this.size!=0 && i>0 && i<this.maxSize)
+        if (this.size!=0 && i>=0 && i<this.maxSize)
         {
-           tracks[i]=null;
+        // Shift elements to the left to fill the gap created by removing the track
            for(int j=i;j<this.size;j++)
            {
             tracks[j]=tracks[j+1];        
@@ -205,12 +207,13 @@ class PlayList {
     private int minIndex(int start) {
         int minimum = start;
         if (start<0 || start>this.size){
-            return -1;
+            minimum=-1;
         }
         else {
-            for (int i = start; i<=this.size; i++)
-            if (i<start){
-                minimum = i;
+            for (int i = start; i<this.size; i++)
+            if (tracks[i].getDuration()<start)
+            {
+                minimum = tracks[i].getDuration();
             }
         }
         return minimum;
