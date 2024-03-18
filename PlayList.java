@@ -73,7 +73,7 @@ class PlayList {
      public void removeLast() {
         if (this.size!=0)
         {
-        for (int i=0; i<=this.size; i++)
+        for (int i=0; i<=this.size+1; i++)
         {
         this.size=this.size-1; 
         }
@@ -137,7 +137,7 @@ class PlayList {
         }
         tracks[i]=track;
         this.size++;
-           add=true;
+        add=true;
         }
         return add;
     }
