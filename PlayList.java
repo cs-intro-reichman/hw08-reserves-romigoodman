@@ -75,10 +75,8 @@ class PlayList {
      public void removeLast() {
         if (this.size!=0)
         {
-        for (int i=this.size-1; i>=0; i--)
-        {
         this.size=this.size-1; 
-        }
+        tracks[this.size]=null;
         }
     }
     
