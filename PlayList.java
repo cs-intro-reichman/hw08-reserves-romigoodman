@@ -168,13 +168,15 @@ class PlayList {
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
      public void add(PlayList other) {
-        if (this.size + other.size > this.maxSize){
-        }
-        else
+        int newSize = this.size+other.size;
+        if (newSize <= this.maxSize)
         {
             for (int i=0; i<=other.size; i++)
-            tracks[this.size]=other.tracks[i]; // how to use it?
-            this.size++;
+            {
+                tracks[this.size]=other.tracks[i];
+            }
+        }     
+            this.size=newSize;
         }
     }
 
@@ -186,14 +188,14 @@ class PlayList {
      */
     private int minIndex(int start) {
         int minimum = start;
-        if (start<0 || start>this.size){
-            minimum=-1;
+        if (start<0 || start>=this.size){
+            return -1;
         }
         else {
             for (int i = start; i<this.size; i++)
-            if (tracks[i].getDuration()<start)
+            if (tracks[i].getDuration()<tracks[minimum].getDuration())
             {
-                minimum = tracks[i].getDuration();
+                minimum = i;
             }
         }
         return minimum;
@@ -202,7 +204,12 @@ class PlayList {
     /** Returns the title of the shortest track in this list. 
      *  If the list is empty, returns null. */
     public String titleOfShortestTrack() {
-        return tracks[minIndex(0)].getTitle();
+        if (this.size==0)
+        {
+            return null;
+        }
+        int shortestIndex = minIndex(0);
+        return tracks[shortestIndex].getTitle();
     }
 
     /** Sorts this list by increasing duration order: Tracks with shorter
@@ -212,7 +219,7 @@ class PlayList {
     public void sortedInPlace() {
         for (int i = 0; i < this.size - 1; i++) {
             int minimum = minIndex(i);
-            if (i != minimum) {
+            if (i != minimum && minimum!=-1) {
                 Track temp = tracks[i];
                 tracks[i] = tracks[minimum];
                 tracks[minimum] = temp;
