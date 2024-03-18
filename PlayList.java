@@ -35,10 +35,10 @@ class PlayList {
      *  If the list is full, does nothing and returns false.
      *  Otherwise, appends the track and returns true. */
     public boolean add(Track track) {
-        if (this.size<this.maxSize) // if this condition is true, there is space available in the list to add the track.
+        if (size<maxSize) // if this condition is true, there is space available in the list to add the track.
         {
-        tracks[this.size]=track;
-        this.size++;
+        tracks[size]=track;
+        size++;
         return true;
         }
         else 
@@ -51,7 +51,7 @@ class PlayList {
     //// For an efficient implementation, use StringBuilder.
     public String toString() {
         StringBuilder dataToList = new StringBuilder();
-        for (int i=0; i<=this.size; i++)
+        for (int i=0; i<this.size; i++)
         {
           dataToList.append(tracks[i].toString()); 
           dataToList.append("\n");
@@ -65,15 +65,15 @@ class PlayList {
      public void removeLast() {
         if (this.size!=0)
         {
-        this.size=this.size-1; 
-        tracks[this.size]=null;
+        size--;
+        tracks[size]=null;
         }
     }
     
     /** Returns the total duration (in seconds) of all the tracks in this list.*/
     public int totalDuration() {
         int totalSecounds = 0;
-        for (int i=0; i<this.size; i++)
+        for (int i=0; i<size; i++)
         {
             totalSecounds = totalSecounds + tracks[i].getDuration();
         }
@@ -84,16 +84,14 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) 
     {
-    for (int i=0; i<this.size; i++)
+    for (int i=0; i<size; i++)
        {
         if ( title.equals(tracks[i].getTitle()))
         {
         return i;
         }
-        j = -1;
-    }
+        }     
         return -1;
-       
     }
 
     /** Inserts the given track in index i of this list. For example, if the list is
@@ -104,33 +102,26 @@ class PlayList {
      *  returns true. */
     public boolean add(int i, Track track) {
        boolean add =false;
-        if (i<0 || i>this.maxSize || this.size==this.maxSize)
+        if (i<0 || i>size || size==maxSize)
         {
-        return add;
+        return false;
         }
-        else if (this.size==0 && i==0)
+        else if (size==0 && i==0)
         {
             tracks[0]=track;
-            this.size++;
-            add = true;
+            size++;
+            return true;
         } 
-        else if (i==this.size && this.size<=this.maxSize+1)
+        else
         {
-            tracks[this.size]=track;
-            this.size++;
-            add = true;
-        }
-        else if (this.size<=this.maxSize+1)
-        {
-        for(int j=this.size; j>i ;j--)
+        for(int j=size; j>i ;j--)
         {
         tracks[j]=tracks[j-1];
         }
         tracks[i]=track;
-        this.size++;
-        add=true;
+        size++;
+        return true;
         }
-        return add;
     }
     
      
@@ -138,15 +129,15 @@ class PlayList {
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        if (this.size!=0 && i>=0 && i<this.maxSize)
+        if ( i>=0 && i<maxSize)
         {
         // Shift elements to the left to fill the gap created by removing the track
-           for(int j=i;j<this.size;j++)
+           for(int j=i;j<size-1;j++)
            {
             tracks[j]=tracks[j+1];        
            }  
-           tracks[this.size-1]=null;
-           this.size--;
+           tracks[size-1]=null;
+           size--;
         }
         }
     
