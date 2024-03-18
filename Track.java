@@ -22,11 +22,11 @@ class Track {
 
     /** Returns this track's title. */
     public String getTitle() {
-        return title;
+        return title.toLowerCase();
     }
     /** Returns this track's artist. */
     public String getArtist() {
-        return artist;
+        return artist.toLowerCase();
     }
     /** Returns this track's duration. */
     public int getDuration() {
