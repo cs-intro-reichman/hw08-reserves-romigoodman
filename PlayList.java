@@ -85,9 +85,12 @@ class PlayList {
      *  If such a track is not found, returns -1. */
     public int indexOf(String title) 
     {
+    title=title.toLowerCase();
     for (int i=0; i<this.size; i++)
        {
-        if ( title.equals(tracks[i].getTitle()))
+       String toLowercase = tracks[i].getTitle();
+       toLowercase = toLowercase.toLowerCase();
+        if ( title.equals(toLowercase))
         {
         return i;
         }
