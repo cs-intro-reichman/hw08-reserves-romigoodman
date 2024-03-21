@@ -179,7 +179,7 @@ class PlayList {
         }     
             this.size=newSize;
         }
-    }
+    
 
     /** Returns the index in this list of the track that has the shortest duration,
      *  starting the search in location start. For example, if the durations are 
